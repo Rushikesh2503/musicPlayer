@@ -131,11 +131,12 @@ function moveBarMusic(n){
    bannerBoard(1304,35,"rgb(146, 102, 102)","Rapport Building-Empathy");
     
     if(slider>150){
-        slider=1;
+        slider=0;
         music.pause();
         clearInterval(musicInterval);
         play.style.display = "inline";
         pause.style.display = "none";
+        X=5;
         createGraph()
     }
 }
