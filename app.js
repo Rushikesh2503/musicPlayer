@@ -1,5 +1,5 @@
 
-var canvas,context;
+var canvas,context,musicInterval;
 
 
 function getById(x){
@@ -9,16 +9,42 @@ function getById(x){
 var play=getById("controlBtn_play");
 var pause=getById("controlBtn_pause");
 var music=getById("musicFile");
+
 var musicStarted=false;
 var Width=5;
 var Height=[];
 var X=5;
 var Y=[];
+var slider=1;
 
 window.onload = start;
 play.style.display = "inline";
 pause.style.display = "none";
  
+function playMusic(){
+    play.style.display = "none";
+    pause.style.display = "inline";
+    musicStarted=true;
+    music.play();
+
+    clearInterval(musicInterval);
+
+    musicInterval=setInterval(()=>{
+        moveBarMusic(slider);
+        slider++;
+    },1000)
+}
+
+function pauseMusic(){
+    play.style.display = "inline";
+    pause.style.display = "none";
+    musicStarted=false;
+    music.pause()
+    clearInterval(musicInterval);
+}
+
+
+
  
 let i=0;
 while(i<=150){
@@ -58,13 +84,13 @@ function start() {
     createGraph();
 }
 
+
 function createGraph(){
     // console.log("canvasCreated");
    let i=0;
    while(i<=150){
-    if (i == 150) Height[i] = 500
-      rect(X, Y[i], Width, Height[i],"black");
-      X = X + 10;
+      rect(X, Y[i], Width, Height[i],"gray");
+      X +=10;
       i++;
    }
 
@@ -77,13 +103,44 @@ function createGraph(){
    
 }
 
+function moveBarMusic(n){
+    X=5;
+    let i=0;
+    while(i<n){
+        rect(X,Y[i],Width,Height[i],"red");
+        X+=10;
+        i++;
+    }
+    i=n;
+    while(i<=150){
+        rect(X,Y[i],Width,Height[i],"gray");
+        X+=10;
+        i++;
+    }
+    
+   bannerBoard(55,60,"rgb(17, 209, 34)","Introduction");
+   bannerBoard(243,30,"rgb(34, 221, 140)","one_six");
+   bannerBoard(1257,5,"rgb(34, 221, 140)","");
+   bannerBoard(1283,60,"rgb(26, 0, 184)","Profile");
+   bannerBoard(1347,7,"rgb(103, 165, 67)","Rapport Building-Energy");
+   bannerBoard(1304,35,"rgb(146, 102, 102)","Rapport Building-Empathy");
+    
+    if(slider>150){
+        slider=1;
+        music.pause();
+        clearInterval(musicInterval);
+        play.style.display = "inline";
+        pause.style.display = "none";
+    }
+}
+
 function bannerBoard(x,y,bg,title){
     let titlePos=x+((title.length*7)/2);
 
     if(x>1300){
-    circle(titlePos,bg);
+       circle(titlePos,bg);
        straightLine(titlePos,y,bg);
-       rect(x-98,y,title.length*7+30,20,bg);
+       rect(x-98,y,title.length*7+25,20,bg);
 
        context.fillStyle="white";
        context.font="10pt bold";
@@ -91,15 +148,16 @@ function bannerBoard(x,y,bg,title){
 
     }
     else{
-    circle(titlePos,bg);
-    straightLine(titlePos,y,bg);
-    rect(x,y,title.length*7,20,bg);
+       circle(titlePos,bg);
+       straightLine(titlePos,y,bg);
+       rect(x,y,title.length*7,20,bg);
 
-    context.fillStyle="white";
-    context.font="10pt bold";
-    context.fillText(title,x+5,y+15)
+       context.fillStyle="white";
+       context.font="10pt bold";
+       context.fillText(title,x+5,y+15)
     }
 
 }
+
 
 
