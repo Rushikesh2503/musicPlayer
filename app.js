@@ -1,7 +1,6 @@
 
 var canvas,context,musicInterval;
 
-
 function getById(x){
     return document.getElementById(x)
 }
@@ -20,6 +19,15 @@ var slider=1;
 window.onload = start;
 play.style.display = "inline";
 pause.style.display = "none";
+
+function start() {
+    canvas = getById("canvas");
+    context = canvas.getContext("2d");
+    canvas.width = 1500;
+    canvas.height = 600;
+    canvas.addEventListener("click",MusicFromMiddle);
+    createGraph();
+}
  
 function playMusic(){
     play.style.display = "none";
@@ -42,8 +50,6 @@ function pauseMusic(){
     music.pause()
     clearInterval(musicInterval);
 }
-
-
 
  
 let i=0;
@@ -76,17 +82,16 @@ function straightLine(posi,y,bg){
     context.closePath();
 }
 
-function start() {
-    canvas = getById("canvas");
-    context = canvas.getContext("2d");
-    canvas.width = 1500;
-    canvas.height = 600;
-    createGraph();
+function MusicFromMiddle(e){
+    //console.log(e)
+    let clickPoint=parseInt(e.layerX/10);
+    music.currentTime=clickPoint;
+    slider=clickPoint;
+    moveBarMusic(clickPoint);
 }
 
 
 function createGraph(){
-    // console.log("canvasCreated");
    let i=0;
    while(i<=150){
       rect(X, Y[i], Width, Height[i],"gray");
@@ -140,20 +145,20 @@ function bannerBoard(x,y,bg,title){
     if(x>1300){
        circle(titlePos,bg);
        straightLine(titlePos,y,bg);
-       rect(x-98,y,title.length*7+25,20,bg);
+       rect(x-145,y,title.length*9+25,20+2,bg);
 
        context.fillStyle="white";
-       context.font="10pt bold";
-       context.fillText(title,x-60,y+15)
+       context.font="18px bold";
+       context.fillText(title,x-130,y+15)
 
     }
     else{
        circle(titlePos,bg);
        straightLine(titlePos,y,bg);
-       rect(x,y,title.length*7,20,bg);
+       rect(x,y,title.length*10,20,bg);
 
        context.fillStyle="white";
-       context.font="10pt bold";
+       context.font="18px bold";
        context.fillText(title,x+5,y+15)
     }
 
