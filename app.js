@@ -136,6 +136,7 @@ function moveBarMusic(n){
         clearInterval(musicInterval);
         play.style.display = "inline";
         pause.style.display = "none";
+        createGraph()
     }
 }
 
