@@ -5,26 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/2194019d5d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./style.css">
     <title>Music Player</title>
 </head>
 <body>
-    <container>
+    <div class="container">
         <div class="musicGraph">
-            <canvas id="canvas"></canvas>
+            <canvas id="canvas" ></canvas>
         </div>
-        <div>
-            <button>
-                <i class="fas fa-volume-up"></i>
+        <div class="musicControllers">
+            <button id="controlBtn_play">
+                <i class="fas fa-play" id="play"></i>
             </button>
-            <button>
-                <i class="fas fa-play"></i>
-                <!-- <i class="fas fa-pause"></i> -->
-            </button>
-            <button>
-                <i class="fas fa-forward"></i>
+            <button  id="controlBtn_pause">
+                <i class="fas fa-pause" id="pause"></i>
             </button>
         </div>
-    </container>
+        <audio id="musicFile">
+            <source src="./public/Love Me Like You Do Full Mp3 Song Download 2021(SongsZilla.Net).mp3" type="audio/mpeg"/>
+        </audio>
+    </div>
     <script src="./app.js"></script>
 </body>
 </html>
