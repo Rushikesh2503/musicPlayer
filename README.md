@@ -1,6 +1,7 @@
 # MusicPlayer Assignment for SalesKen 
 
 * *This Assignment done for salesken First round process (By Using Canvas)*
+* *I used 17inch Screen Size to develop this musicPlayer*
 
 ### <a href="https://rushikesh2503.github.io/musicPlayer/">Demo Link</a>
  
